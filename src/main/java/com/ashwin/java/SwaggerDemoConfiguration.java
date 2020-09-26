@@ -23,19 +23,21 @@ import java.util.Random;
 @Configuration
 @EnableSwagger2
 public class SwaggerDemoConfiguration {
+    private static final List<Quote> quotes = new ArrayList<>();
+    static {
+        quotes.add(new Quote(1L, "Winner don't do different things, they do things differently", "Author One"));
+        quotes.add(new Quote(2L, "To get to the heaven, one needs to die first.", "Author Two"));
+        quotes.add(new Quote(3L, "Failures are stepping stone to success.", "Author Three"));
+        quotes.add(new Quote(4L, "Whether you think you can or cannot, you are right.", "Author Four"));
+        quotes.add(new Quote(5L, "Mice play when cats away.", "Author Five"));
+    }
+
     @Autowired
     BuildProperties buildProperties;
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public Quote getQuote() {
-        List<Quote> quotes = new ArrayList<>();
-        quotes.add(new Quote(1L, "Winner don't do different things, they do things differently", "Author One"));
-        quotes.add(new Quote(2L, "To get to the heaven, one needs to die first.", "Author Two"));
-        quotes.add(new Quote(3L, "Failures are stepping stone to success.", "Author Three"));
-        quotes.add(new Quote(4L, "Whether you think you can or cannot, you are right.", "Author Four"));
-        quotes.add(new Quote(5L, "Mice play when cats away.", "Author Five"));
-
         int i = new Random().nextInt(quotes.size());
         return quotes.get(i);
     }
